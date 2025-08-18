@@ -43,3 +43,4 @@ applications:
   - name: sock-shop
   - name: sync-waves
   - name: sync-waves-1
+  - name: sync-waves-10
