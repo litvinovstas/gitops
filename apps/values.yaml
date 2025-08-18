@@ -41,5 +41,6 @@ applications:
         name: nix
   - name: pre-post-sync
   - name: sock-shop
+  - name: sock-shop-2
   - name: sync-waves
   - name: sync-waves-1
