@@ -52,23 +52,23 @@ applications:
   - name: sock-shop
   - name: sync-waves
   - name: pre-post-sync
+  - name: sock-shop12
+  - name: sync-waves2
+  - name: pre-post-sync1
+  - name: sock-shop
+  - name: sync-waves2
+  - name: pre-post-sync3
+  - name: sock-shop
+  - name: sync-waves
+  - name: pre-post-sync3
   - name: sock-shop
   - name: sync-waves
   - name: pre-post-sync
   - name: sock-shop
-  - name: sync-waves
+  - name: sync-waves4
   - name: pre-post-sync
   - name: sock-shop
-  - name: sync-waves
-  - name: pre-post-sync
-  - name: sock-shop
-  - name: sync-waves
-  - name: pre-post-sync
-  - name: sock-shop
-  - name: sync-waves
-  - name: pre-post-sync
-  - name: sock-shop
-  - name: sync-waves
+  - name: sync-waves1
   - name: pre-post-sync
   - name: sock-shop
   - name: sync-waves
