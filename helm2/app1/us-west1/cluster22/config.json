@@ -1,0 +1,11 @@
+{
+  "cluster" : {
+    "name" : "cluster22",
+    "address" : "https://35.233.139.33",
+    "port" : "5450"
+  },
+  "releaseTag" : "1.15",
+  "envTag" : "uswest1",
+  "replicas" : "1",
+  "serviceTag" : "helm"
+}

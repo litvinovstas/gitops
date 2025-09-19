@@ -1,0 +1,11 @@
+namespace: "argocd"
+prefix: "name"
+replicas: 3
+spec:
+  destination:
+    server: "https://kubernetes.default.svc"
+  project: "5b02f9dc"
+  source:
+    repoURL: "https://github.com/mteodor/argocd-example-apps"
+    targetRevision: "HEAD"
+revision: "syncstep-multisource"

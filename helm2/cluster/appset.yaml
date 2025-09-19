@@ -1,0 +1,30 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: cluster-appset-all
+spec:
+  goTemplate: true
+  goTemplateOptions: ["missingkey=error"]
+  generators:
+  - clusters: {} 
+  template:
+    metadata:
+      name: cluster-appset-all-{{.name}}
+      labels:
+        # harness.io/envRef: {{.values.env}}
+        harness.io/envRef: prod
+        harness.io/serviceRef: helm
+    spec:
+      project: f5384cd4
+      source:
+        path: helm-nginx
+        repoURL: https://github.com/wings-software/gitops-automation
+        targetRevision: appset-demo
+
+      destination:
+        server: '{{.server}}' # 'server' field of the secret
+        namespace: cluster-appset-all-{{.nameNormalized}}
+      syncPolicy:
+        syncOptions:
+         - Validate=true     
+         - CreateNamespace=true

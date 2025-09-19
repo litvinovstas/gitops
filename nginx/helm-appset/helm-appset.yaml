@@ -1,0 +1,32 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: helm-appset
+  namespace: mirko-account-qa-free-ha
+spec:
+  goTemplate: true
+  goTemplateOptions: ["missingkey=error"]
+  generators:
+  - git:
+      repoURL: https://github.com/mteodor/argocd-example-apps
+      revision: HEAD
+      directories:
+      - path: helm-appset/templates/*
+  template:
+    metadata:
+      name: '{{.path.basename}}'
+    spec:
+      project: "5b02f9dc"
+      source:
+        chart: nginx
+        repoURL: https://charts.bitnami.com/bitnami
+        # helm:
+        #   valueFiles:
+        #   - '{{.path.path}}/values.yaml'
+      targetRevision: 18.2.2
+      destination:
+        server: https://kubernetes.default.svc
+        namespace: '{{.path.basename}}'
+      syncPolicy:
+        syncOptions:
+        - CreateNamespace=true

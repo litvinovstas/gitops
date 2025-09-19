@@ -20,6 +20,16 @@ spec:
         app: {{ template "helm-guestbook.name" . }}
         release: {{ .Release.Name }}
     spec:
+      initContainers:
+      - name: init-config
+        image: busybox:1.35
+        command:
+        - sh
+        - -c
+        - |
+          echo "Init-Config: Starting to copy configuration files..."
+          echo "Init-Config: Configuration files copied successfully."
+
       containers:
         - name: {{ .Chart.Name }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"

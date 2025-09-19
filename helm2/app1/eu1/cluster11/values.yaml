@@ -1,0 +1,26 @@
+cluster:
+  name: "cluster11"
+overrideVar2: "overrideVar2Env"
+test: "123"
+replicas: 2
+overrideFromDiffEnv: "overrideFromDiffEnvFromEnv"
+overrideTest: "ovverrideTestFromEnv"
+overrideVar3: "overrideVar3Env"
+anotherPorts:
+  http: 3333
+anything: "test"
+envTag: "eu1"
+testPorts:
+  http: 2222
+common:
+  envTag: "eu1"
+  namespace: "alexc-argocd"
+overrideSvcSecretVar: "secret"
+portFromStep:
+  http: 33
+serviceTag: "multisource"
+containerPorts:
+  http: 81
+deployment:
+  envTag: "eu1"
+  namespace: "alexc-argocd"
