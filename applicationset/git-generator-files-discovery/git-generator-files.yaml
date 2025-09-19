@@ -1,0 +1,25 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: guestbook2
+spec:
+  goTemplate: true
+  goTemplateOptions: ["missingkey=error"]
+  generators:
+    - git:
+        repoURL: https://github.com/mteodor/argocd-example-apps.git
+        revision: HEAD
+        files:
+        - path: "applicationset/git-generator-files-discovery/cluster-config/**/config.json"
+  template:
+    metadata:
+      name: '{{cluster.name}}-guestbook'
+    spec:
+      project: 36bd3131
+      source:
+        repoURL: https://github.com/argoproj/applicationset.git
+        targetRevision: HEAD
+        path: "applicationset/git-generator-files-discovery/apps/guestbook"
+      destination:
+        server: '{{cluster.address}}'
+        namespace: mirko-account-prod2-test

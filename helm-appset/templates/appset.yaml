@@ -1,0 +1,41 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: {{ .Values.prefix }}-appset
+  namespace: {{ .Values.namespace }}
+spec:
+  goTemplate: true
+  goTemplateOptions: ["missingkey=error"]
+  generators:
+    - git:
+        repoURL: https://github.com/mteodor/argocd-example-apps
+        revision: {{ .Values.revision }}
+        files:
+          - path: helm2/app1/*/*/config.json
+  template:
+    metadata:
+      name: '{{"{{"}}.path.basename{{"}}"}}'
+      labels:
+        harness.io/envRef: '{{"{{"}}.envTag{{"}}"}}'
+        harness.io/serviceRef: '{{"{{"}}.serviceTag{{"}}"}}'
+    spec:
+      project: {{ .Values.spec.project }}
+      sources:
+        - repoURL: https://github.com/mteodor/argocd-example-apps
+          targetRevision: syncstep-multisource
+          ref: test
+        - repoURL: https://charts.bitnami.com/bitnami
+          targetRevision: 18.1.2
+          chart: nginx
+          helm:
+            valueFiles:
+            - $test/{{"{{"}}.path.path{{"}}"}}/values.yaml
+      destination:
+        name: '{{"{{"}}.cluster.name{{"}}"}}'
+        namespace: '{{"{{"}}.path.basename{{"}}"}}'
+      syncPolicy:
+        syncOptions:
+         - Validate=true     
+         - CreateNamespace=true
+        automated: {}
+

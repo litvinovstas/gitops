@@ -1,0 +1,28 @@
+{
+  "cluster" : {
+    "address" : "https://35.233.139.33",
+    "port" : "5450",
+    "name" : "cluster11"
+  },
+  "releaseTag" : "1.15",
+  "replicas" : "2",
+  "anotherPorts" : {
+    "http" : "58"
+  },
+  "envTag" : "eu1",
+  "testPorts" : {
+    "http" : "70"
+  },
+  "portFromStep" : {
+    "http" : "333"
+  },
+  "serviceTag" : "helm",
+  "testObject" : {
+    "hello" : "world"
+  },
+  "containerPort" : {
+    "http" : "1234"
+  },
+  "image_tag" : "noop-job-2025.08.07_09.44.17-feab37608dcf449b6af2b9068f5ef535c59daa31",
+  "imageTag" : "asdf"
+}

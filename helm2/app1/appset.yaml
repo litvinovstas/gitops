@@ -1,0 +1,39 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: multisource-mteodor-appset
+spec:
+  goTemplate: true
+  goTemplateOptions: ["missingkey=error"]
+  generators:
+    - git:
+        repoURL: https://github.com/mteodor/argocd-example-apps
+        revision: master
+        files:
+          - path: helm2/app1/*/*/values.yaml
+  template:
+    metadata:
+      name: '{{.path.basename}}'
+      labels:
+        harness.io/envRef: appset
+        harness.io/serviceRef: multisource
+    spec:
+      project: d73a4830
+      sources:
+        - repoURL: https://github.com/mteodor/argocd-example-apps
+          targetRevision: syncstep-multisource
+          ref: values
+        - repoURL: https://charts.bitnami.com/bitnami
+          targetRevision: 18.1.2
+          chart: nginx
+          helm:
+            valueFiles:
+            - $values/{{.path.path}}/values.yaml
+      destination:
+        name: '{{.cluster.name}}'
+        namespace: '{{.path.basename}}'
+      syncPolicy:
+        syncOptions:
+         - Validate=true     
+         - CreateNamespace=true
+        automated: {}
